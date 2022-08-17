@@ -11,6 +11,13 @@ import Vars
 io :: MonadIO m => IO a -> m a  
 io = liftIO
 
+quietly :: IO a -> IO a
+quietly ioa = do
+  hSetEcho stdin False
+  a <- ioa
+  hSetEcho stdin True
+  return a
+
 showQuestion :: Question -> IO ()
 showQuestion (_ , q , os) = do
   putStrLn q
@@ -21,7 +28,7 @@ showQuestion (_ , q , os) = do
 invalidAns :: IO Char
 invalidAns = do 
   putStrLn "You entered an invalid answer. Please try again"
-  quietly $ getChar
+  quietly getChar
 
 ansCheck :: (MonadIO m, MonadState Tracker m) => Answer -> Question -> m ()
 ansCheck x ques@(c, _, _) =
@@ -75,10 +82,3 @@ modifyMetaverse f t = t { _Metaverse = f (_Metaverse t) }
 
 incQNum :: Tracker -> Tracker
 incQNum t = t { qNum = (+1) (qNum t)}
-
-quietly :: IO a -> IO a
-quietly ioa = do
-  hSetEcho stdin False
-  a <- ioa
-  hSetEcho stdin True
-  return a

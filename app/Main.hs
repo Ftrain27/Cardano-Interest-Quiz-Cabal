@@ -2,6 +2,8 @@
 
 module Main where
 import Control.Monad.State
+import Control.Concurrent
+import System.IO
 import Workspace
 import Vars
 import Results
@@ -27,6 +29,7 @@ runIt :: StateT Tracker IO ()
 runIt = do
   runQuiz allQuestions
   io (putStrLn "Calculating results...")
+  io $ threadDelay (10 ^ 6)
   tracker <- get
   io $ sortResults (mkResults tracker projRec)
   io (putStrLn "Thank you for your time")
@@ -37,17 +40,14 @@ runQuiz []     = return ()
 runQuiz (q:qs) = do 
   io $ showQuestion q
   ans <- io (quietly getChar)
-  io $ putStrLn ""
+  io $ putStrLn ("You chose " ++ [ans])
   ansCheck ans q
-  -- t <- get
-  -- io $ print t
   runQuiz qs
 
 --runResults :: (MonadIO m, MonadState Tracker m) => m ()
 --runResults = do
   --tracker <- get
   --io $ print $ show (mkResults tracker projRec) 
-
 
 -- MonadIO = IO (m)
 -- runstate  State s a       s
