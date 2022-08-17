@@ -2,12 +2,14 @@
 
 module Results where
 
-import Vars
 import Control.Monad.State
 import Data.List (sortBy)
 import Data.Function (on)
+import Vars
 
-fourth :: (a,b,c,d) -> d 
+--Pure Code
+
+fourth :: (a,b,c,d) -> d
 fourth (a,b,c,d) = d
 
 third :: (a,b,c,d) -> c
@@ -21,25 +23,27 @@ first (a,b,c,d) = a
 
 mkResults :: Tracker -> Recommendations -> Recommendations
 mkResults t [] = []
-mkResults t (r : rs) = 
-  case (testResults t r) of
+mkResults t (r : rs) =
+  case testResults t r of
     True  -> r : mkResults t rs
     False -> mkResults t rs
 
 testResults :: Tracker -> Project -> Bool
-testResults t proj@(c, _, _, n) = 
-  case c of 
+testResults t proj@(c, _, _, n) =
+  case c of
     Nft       -> _Nft       t >= n
     Defi      -> _Defi      t >= n
     Gaming    -> _Gaming    t >= n
     Identity  -> _Identity  t >= n
     Metaverse -> _Metaverse t >= n
 
-sortResults :: Recommendations -> IO () 
-sortResults recs = 
+--Impure Code
+
+sortResults :: Recommendations -> IO ()
+sortResults recs =
   showResults a where
     a = sortBy (compare `on` first) (take 5 (sortBy (flip compare `on` fourth) recs))
-    
+
 showResults :: Recommendations -> IO ()
 showResults [] = return ()
 showResults (r : rs) = putStrLn (second r ++ "    " ++ third r) >> showResults rs

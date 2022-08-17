@@ -4,7 +4,7 @@ module Main where
 import Control.Monad.State
 import Control.Concurrent
 import System.IO
-import Workspace
+import Construct
 import Vars
 import Results
 
@@ -48,10 +48,6 @@ runQuiz (q:qs) = do
 --runResults = do
   --tracker <- get
   --io $ print $ show (mkResults tracker projRec) 
-
--- MonadIO = IO (m)
--- runstate  State s a       s
--- runState  (eval e)        []
 
 -- runStateT :: s -> m (a, s)
 

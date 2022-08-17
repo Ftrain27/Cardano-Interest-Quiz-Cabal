@@ -1,46 +1,14 @@
 {-# LANGUAGE BlockArguments #-}
 {-# LANGUAGE FlexibleContexts #-}
 
-module Workspace where
+module Construct where
 
 import Control.Monad.State
 import System.IO
 import System.Exit (exitSuccess)
 import Vars
 
-io :: MonadIO m => IO a -> m a  
-io = liftIO
-
-quietly :: IO a -> IO a
-quietly ioa = do
-  hSetEcho stdin False
-  a <- ioa
-  hSetEcho stdin True
-  return a
-
-showQuestion :: Question -> IO ()
-showQuestion (_ , q , os) = do
-  putStrLn q
-  helper os where
-    helper []     = return ()
-    helper (x:xs) = putStrLn ("    " ++  x) >> helper xs
-
-invalidAns :: IO Char
-invalidAns = do 
-  putStrLn "You entered an invalid answer. Please try again"
-  quietly getChar
-
-ansCheck :: (MonadIO m, MonadState Tracker m) => Answer -> Question -> m ()
-ansCheck x ques@(c, _, _) =
- case x of 
-    'a' -> modifyTracker c (+0)
-    'b' -> modifyTracker c (+1)
-    'c' -> modifyTracker c (+2)
-    'd' -> modifyTracker c (+3)
-    'q' -> io (putStrLn "Thank you for your time") >> io exitSuccess
-    _   -> do 
-      ans <- io invalidAns
-      ansCheck ans ques
+--Pure Code
 
 mkTracker :: MonadIO m => m Tracker 
 mkTracker = return $ Tracker 
@@ -82,3 +50,39 @@ modifyMetaverse f t = t { _Metaverse = f (_Metaverse t) }
 
 incQNum :: Tracker -> Tracker
 incQNum t = t { qNum = (+1) (qNum t)}
+
+--Impure Code
+
+io :: MonadIO m => IO a -> m a  
+io = liftIO
+
+quietly :: IO a -> IO a
+quietly ioa = do
+  hSetEcho stdin False
+  a <- ioa
+  hSetEcho stdin True
+  return a
+
+showQuestion :: Question -> IO ()
+showQuestion (_ , q , os) = do
+  putStrLn q
+  helper os where
+    helper []     = return ()
+    helper (x:xs) = putStrLn ("    " ++  x) >> helper xs
+
+invalidAns :: IO Char
+invalidAns = do 
+  putStrLn "You entered an invalid answer. Please try again"
+  quietly getChar
+
+ansCheck :: (MonadIO m, MonadState Tracker m) => Answer -> Question -> m ()
+ansCheck x ques@(c, _, _) =
+ case x of 
+    'a' -> modifyTracker c (+0)
+    'b' -> modifyTracker c (+1)
+    'c' -> modifyTracker c (+2)
+    'd' -> modifyTracker c (+3)
+    'q' -> io (putStrLn "Thank you for your time") >> io exitSuccess
+    _   -> do 
+      ans <- io invalidAns
+      ansCheck ans ques

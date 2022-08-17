@@ -16,8 +16,6 @@ module Vars (
     ,projRec
 ) where
 
---import Control.Lens
-
 type Prompt   = String
 type Option   = String
 type Name     = String
@@ -31,10 +29,9 @@ type Project         = (Category, Name, Link, Score)
 type Recommendations = [Project]
 type Result          = (Name, Link)
 -- data Project         = Project { Category :: Category, Name :: String, Link :: String, Score :: Score }
-
+-- do we still need the above comment?
 
 data Category = Nft | Defi | Gaming | Identity | Metaverse deriving (Show, Eq, Ord)
-
 data Tracker = Tracker 
     { _Nft       :: Score 
     , _Defi      :: Score
@@ -43,8 +40,6 @@ data Tracker = Tracker
     , _Metaverse :: Score
     , qNum       :: Score
     } deriving (Show, Eq)
-
---makeLenses ''Tracker
 
 q1  = (Nft, "1. Have you heard of NFTs?", ["a. I know about it, but it doesn't interest me","b. What is that?","c. I think I have before", "d. I love Nfts!"])
 q2  = (Nft, "2. Do you have any NFTs?", ["a. No", "b. Yes, I love collecting them to show off", "c. Yes, I love collecting them for their utility", "d. Yes, I love flipping them"])
