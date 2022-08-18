@@ -9,17 +9,18 @@ import Vars
 
 --Pure Code
 
-fourth :: (a,b,c,d) -> d
-fourth (a,b,c,d) = d
-
-third :: (a,b,c,d) -> c
-third (a,b,c,d) = c
+first :: (a,b,c,d) -> a
+first (a,b,c,d) = a
 
 second :: (a,b,c,d) -> b
 second (a,b,c,d) = b
 
-first :: (a,b,c,d) -> a
-first (a,b,c,d) = a
+third :: (a,b,c,d) -> c
+third (a,b,c,d) = c
+
+fourth :: (a,b,c,d) -> d
+fourth (a,b,c,d) = d
+
 
 mkResults :: Tracker -> Recommendations -> Recommendations
 mkResults t [] = []

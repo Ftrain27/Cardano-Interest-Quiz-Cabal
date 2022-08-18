@@ -28,8 +28,6 @@ type Quiz            = [Question]
 type Project         = (Category, Name, Link, Score) 
 type Recommendations = [Project]
 type Result          = (Name, Link)
--- data Project         = Project { Category :: Category, Name :: String, Link :: String, Score :: Score }
--- do we still need the above comment?
 
 data Category = Nft | Defi | Gaming | Identity | Metaverse deriving (Show, Eq, Ord)
 data Tracker = Tracker 
