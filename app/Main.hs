@@ -21,6 +21,7 @@ main =  do
   putStrLn "This is a simple, 10 question quiz used to match your interests to relevant crypto projects in the Cardano Ecosystem"
   putStrLn "Please press a, b, c or d to answer each question"
   putStrLn "You can also press q to quit at any time"
+  hSetBuffering stdin NoBuffering
   tracker <- mkTracker
   evalStateT runIt tracker
   return ()
