@@ -1,0 +1,10 @@
+2022-08-17 19:46:48.833316000000 [52567(ThreadId 13)] ERROR APP - user error (<getModule> loaded module can not find from path. </Users/EfrainMassanka-Garcia/DeFi-Quiz-Cabal/DeFi-Quiz-Cabal/app/Main.hs> [])
+2022-08-17 19:46:48.877966000000 [52567(ThreadId 13)] ERROR APP - start debugging failed. user error (ExecResult not found.) : Left "user error (ExecResult not found.)"
+2022-08-17 19:48:07.286165000000 [52650(ThreadId 13)] ERROR APP - user error (<getModule> loaded module can not find from path. </Users/EfrainMassanka-Garcia/DeFi-Quiz-Cabal/DeFi-Quiz-Cabal/app/Main.hs> [])
+2022-08-17 19:48:07.345152000000 [52650(ThreadId 13)] ERROR APP - start debugging failed. user error (ExecResult not found.) : Left "user error (ExecResult not found.)"
+2022-08-17 19:51:49.956823000000 [52815(ThreadId 13)] ERROR APP - user error (<getModule> loaded module can not find from path. </Users/EfrainMassanka-Garcia/DeFi-Quiz-Cabal/DeFi-Quiz-Cabal/app/Main.hs> [])
+2022-08-17 19:51:49.979092000000 [52815(ThreadId 13)] ERROR APP - start debugging failed. user error (ExecResult not found.) : Left "user error (ExecResult not found.)"
+2022-08-17 20:31:11.269314000000 [53424(ThreadId 13)] ERROR APP - user error (<getModule> loaded module can not find from path. </Users/EfrainMassanka-Garcia/DeFi-Quiz-Cabal/DeFi-Quiz-Cabal/app/Main.hs> [])
+2022-08-17 20:31:11.319381000000 [53424(ThreadId 13)] ERROR APP - start debugging failed. user error (ExecResult not found.) : Left "user error (ExecResult not found.)"
+2022-08-17 20:31:42.278691000000 [53507(ThreadId 13)] ERROR APP - user error (<getModule> loaded module can not find from path. </Users/EfrainMassanka-Garcia/DeFi-Quiz-Cabal/DeFi-Quiz-Cabal/app/Main.hs> [])
+2022-08-17 20:31:42.334069000000 [53507(ThreadId 13)] ERROR APP - start debugging failed. user error (ExecResult not found.) : Left "user error (ExecResult not found.)"
