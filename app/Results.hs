@@ -5,6 +5,7 @@ module Results where
 import Control.Monad.State
 import Data.List (sortBy)
 import Data.Function (on)
+import System.Console.ANSI
 import Vars
 
 --Pure Code

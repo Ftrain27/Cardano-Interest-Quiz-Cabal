@@ -4,6 +4,7 @@ module Main where
 import Control.Monad.State
 import Control.Concurrent
 import System.IO
+import System.Console.ANSI
 import Construct
 import Vars
 import Results

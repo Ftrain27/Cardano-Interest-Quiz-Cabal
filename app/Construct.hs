@@ -6,6 +6,7 @@ module Construct where
 import Control.Monad.State
 import System.IO
 import System.Exit (exitSuccess)
+import System.Console.ANSI
 import Vars
 
 --Pure Code
