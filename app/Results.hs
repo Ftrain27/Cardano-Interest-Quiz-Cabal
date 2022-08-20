@@ -48,7 +48,14 @@ sortResults recs =
 
 showResults :: Recommendations -> IO ()
 showResults [] = return ()
-showResults (r : rs) = putStrLn (second r ++ "    " ++ third r) >> showResults rs
+showResults (r : rs) = do -- putStrLn (second r ++ "    " ++ third r) >> showResults rs
+  setSGR [SetColor Foreground Dull Blue,SetConsoleIntensity BoldIntensity]
+  putStr $ second r 
+  setSGR [SetColor Foreground Dull Red,SetConsoleIntensity NormalIntensity]
+  setCursorColumn 25
+  putStrLn  $ third r 
+  setSGR [Reset]
+  showResults rs
 
 -- mkResults :: (MonadIO m, MonadState Tracker m) => Recommendations -> m (Recommendations)
 
