@@ -35,6 +35,7 @@ runIt = do
 runQuiz :: (MonadIO m, MonadState Tracker m) => Quiz -> m ()
 runQuiz []     = return ()
 runQuiz (q:qs) = do 
+-- we need to implement incQNum here like how we did mkResults in line 31, then we can remove hard-coded question numbers from vars
   io $ showQuestion q
   ans <- io (quietly getChar)
   ansCheck ans q
