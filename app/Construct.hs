@@ -80,11 +80,14 @@ invalidAns = do
 ansCheck :: (MonadIO m, MonadState Tracker m) => Answer -> Question -> m ()
 ansCheck x ques@(c, _, _) =
  case x of 
-    'a' -> modifyTracker c (+0)
-    'b' -> modifyTracker c (+1)
-    'c' -> modifyTracker c (+2)
-    'd' -> modifyTracker c (+3)
+    'a' -> modifyTracker c (+0) >> showAns 'a'
+    'b' -> modifyTracker c (+1) >> showAns 'b'
+    'c' -> modifyTracker c (+2) >> showAns 'c'
+    'd' -> modifyTracker c (+3) >> showAns 'd'
     'q' -> io (putStrLn "Thank you for your time") >> io exitSuccess
     _   -> do 
       ans <- io invalidAns
       ansCheck ans ques
+
+showAns :: (MonadIO m, MonadState Tracker m) => Char -> m ()
+showAns x = io $ putStrLn ("You chose " ++ [x]) 
