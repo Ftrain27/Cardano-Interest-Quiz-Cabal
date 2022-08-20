@@ -75,6 +75,7 @@ showQuestion (_ , q , os) = do
 invalidAns :: IO Char
 invalidAns = do 
   italics $ putStrLn "You entered an invalid answer. Please try again!"
+  putStrLn ""
   quietly getChar
 
 ansCheck :: (MonadIO m, MonadState Tracker m) => Answer -> Question -> m ()

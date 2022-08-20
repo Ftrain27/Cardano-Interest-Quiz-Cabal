@@ -7,6 +7,7 @@ import Data.List (sortBy)
 import Data.Function (on)
 import System.Console.ANSI
 import Vars
+import ANSI
 
 --Pure Code
 
@@ -53,8 +54,8 @@ showResults (r : rs) = do -- putStrLn (second r ++ "    " ++ third r) >> showRes
   putStr $ second r 
   setSGR [SetColor Foreground Dull Red,SetConsoleIntensity NormalIntensity]
   setCursorColumn 25
-  putStrLn  $ third r 
-  setSGR [Reset]
+  putStrLn $ third r 
+  reset
   showResults rs
 
 -- mkResults :: (MonadIO m, MonadState Tracker m) => Recommendations -> m (Recommendations)

@@ -35,16 +35,8 @@ wait x
 runIt :: StateT Tracker IO ()
 runIt = do
   runQuiz allQuestions
-  io $ putStrLn ""
-  io endScreen
-  -- want this to blink until thread delay ,then clear the line , then show results
-  io $ threadDelay (10 ^ 6)
-  io clearLine
-  io $ putStrLn ""
   tracker <- get
-  io $ sortResults (mkResults tracker projRec)
-  io $ putStrLn ""
-  io (putStrLn "Thank you for your time")
+  io $ runResults tracker
 
 runQuiz :: (MonadIO m, MonadState Tracker m) => Quiz -> m ()
 runQuiz []     = return ()
@@ -53,6 +45,17 @@ runQuiz (q:qs) = do
   ans <- io (quietly getChar)
   io $ putStrLn ""
   ansCheck ans q
-  io $ putStrLn ("You chose " ++ [ans])
   io $ putStrLn ""
   runQuiz qs
+
+runResults :: Tracker -> IO ()
+runResults t = do
+  io $ bold $ putStrLn "Calculating results..."
+  io $ reset
+  io $ threadDelay (2 * (10 ^ 6))
+  -- io clearLine -- do we really want this text to go away? it looks nice imo to keep it here 
+  io $ putStrLn "Here are the projects that would most interest you:"
+  io $ putStrLn ""
+  io $ sortResults (mkResults t projRec)
+  io $ putStrLn ""
+  io (putStrLn "Thank you for your time")
