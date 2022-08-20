@@ -34,6 +34,7 @@ wait x
 
 runIt :: StateT Tracker IO ()
 runIt = do
+  io $ putStrLn ""
   runQuiz allQuestions
   tracker <- get
   io $ runResults tracker
