@@ -8,6 +8,7 @@ import System.IO
 import System.Exit (exitSuccess)
 import System.Console.ANSI
 import Vars
+import ANSI
 
 --Pure Code
 
@@ -66,17 +67,14 @@ quietly ioa = do
 
 showQuestion :: Question -> IO ()
 showQuestion (_ , q , os) = do
-  setSGR [ SetConsoleIntensity BoldIntensity ]
-  putStrLn q
-  setSGR [ SetConsoleIntensity NormalIntensity ]
+  bold $ putStrLn q
   helper os where
     helper []      = return ()
     helper (x:xs)  = putStrLn ("    " ++  x) >> helper xs
   
-
 invalidAns :: IO Char
 invalidAns = do 
-  putStrLn "You entered an invalid answer. Please try again"
+  italics $ putStrLn "You entered an invalid answer. Please try again!"
   quietly getChar
 
 ansCheck :: (MonadIO m, MonadState Tracker m) => Answer -> Question -> m ()
