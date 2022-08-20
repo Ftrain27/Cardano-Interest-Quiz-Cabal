@@ -52,15 +52,6 @@ showResults (r : rs) = putStrLn (second r ++ "    " ++ third r) >> showResults r
 
 -- mkResults :: (MonadIO m, MonadState Tracker m) => Recommendations -> m (Recommendations)
 
---a = Tracker { _Nft = 2, _Defi = 0, _Gaming = 0, _Identity = 0, _Metaverse = 0, qNum = 0 }
-
--- Check the values of each of the trackers using a general function, recursion, and polymorphism for the tracker data type
--- there are 3 thresholds for tracker values, add a project from the specific data type to the results every time a threshold is crossed for the associated tracker
--- max display results is 5
--- sort the results list by the numbers in each tuple, with the highest ones first
--- take the first 5 results
--- display results
-
 --  2. Assign a number to each data type, then use a random generator to select a data type and remove all of its associated results
 
 -- eventually implement a web scraper and interpreter to suggest up-to-date projects

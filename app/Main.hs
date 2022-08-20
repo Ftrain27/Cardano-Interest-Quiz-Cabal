@@ -8,12 +8,8 @@ import Construct
 import Vars
 import Results
 
-
--- running main in ghci is fine
--- need to figure out why its not doing the same with 'cabal run'
 -- suggested additions:
 -- add ability to go back and change answers
-
 
 main :: IO ()
 main =  do 
@@ -41,7 +37,6 @@ runQuiz []     = return ()
 runQuiz (q:qs) = do 
   io $ showQuestion q
   ans <- io (quietly getChar)
-  io $ putStrLn ("You chose " ++ [ans])
   ansCheck ans q
   runQuiz qs
 
@@ -51,12 +46,3 @@ runQuiz (q:qs) = do
   --io $ print $ show (mkResults tracker projRec) 
 
 -- runStateT :: s -> m (a, s)
-
--- runQuiz :: Quiz -> StateT Tracker IO ()
--- runQuiz []     = return ()
--- runQuiz (q:qs) = do 
---   showQuestion q
---   ans <- io (quietly $ getChar)
---   ansCheck ans q
---   -- Tracker _Nft
---   runQuiz qs
