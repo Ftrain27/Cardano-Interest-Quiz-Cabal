@@ -66,10 +66,15 @@ quietly ioa = do
 
 showQuestion :: Question -> IO ()
 showQuestion (_ , q , os) = do
+  putStrLn ""
+  setSGR [SetColor Foreground Dull Yellow,SetConsoleIntensity BoldIntensity]
   putStrLn q
+  setSGR [Reset]
+  putStrLn ""
   helper os where
-    helper []     = return ()
-    helper (x:xs) = putStrLn ("    " ++  x) >> helper xs
+    helper []      = return ()
+    helper (x:xs)  = putStrLn ("    " ++  x) >> helper xs
+  
 
 invalidAns :: IO Char
 invalidAns = do 

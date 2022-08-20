@@ -30,10 +30,16 @@ main =  do
 runIt :: StateT Tracker IO ()
 runIt = do
   runQuiz allQuestions
+  io $ putStrLn ""
+  io $ setSGR [SetColor Foreground Dull Magenta,SetConsoleIntensity BoldIntensity]
+  -- want this to blink until thread delay ,then clear the line , then show results
   io (putStrLn "Calculating results...")
   io $ threadDelay (10 ^ 6)
+  -- io $ clearLine
+  io $ putStrLn ""
   tracker <- get
   io $ sortResults (mkResults tracker projRec)
+  io $ putStrLn ""
   io (putStrLn "Thank you for your time")
 
 
@@ -42,7 +48,10 @@ runQuiz []     = return ()
 runQuiz (q:qs) = do 
   io $ showQuestion q
   ans <- io (quietly getChar)
+  io $ putStrLn ""
+  io $ setSGR [SetColor Foreground Dull Green]
   io $ putStrLn ("You chose " ++ [ans])
+  io $ setSGR [Reset]
   ansCheck ans q
   runQuiz qs
 
