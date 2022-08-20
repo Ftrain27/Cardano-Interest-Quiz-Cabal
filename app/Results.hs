@@ -50,8 +50,6 @@ showResults :: Recommendations -> IO ()
 showResults [] = return ()
 showResults (r : rs) = putStrLn (second r ++ "    " ++ third r) >> showResults rs
 
--- https://hackage.haskell.org/package/tuple-0.3.0.2/docs/Data-Tuple-Select.html has a solution, but replit can't import the package
-
 -- mkResults :: (MonadIO m, MonadState Tracker m) => Recommendations -> m (Recommendations)
 
 --a = Tracker { _Nft = 2, _Defi = 0, _Gaming = 0, _Identity = 0, _Metaverse = 0, qNum = 0 }

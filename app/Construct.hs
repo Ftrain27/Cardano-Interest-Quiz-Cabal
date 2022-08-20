@@ -66,7 +66,9 @@ quietly ioa = do
 
 showQuestion :: Question -> IO ()
 showQuestion (_ , q , os) = do
+  setSGR [ SetConsoleIntensity BoldIntensity ]
   putStrLn q
+  setSGR [ SetConsoleIntensity NormalIntensity ]
   helper os where
     helper []     = return ()
     helper (x:xs) = putStrLn ("    " ++  x) >> helper xs
