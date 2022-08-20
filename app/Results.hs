@@ -52,7 +52,7 @@ showResults (r : rs) = do -- putStrLn (second r ++ "    " ++ third r) >> showRes
   setSGR [SetColor Foreground Dull Blue,SetConsoleIntensity BoldIntensity]
   putStr $ second r 
   setSGR [SetColor Foreground Dull Red,SetConsoleIntensity NormalIntensity]
-  setCursorColumn 25
+  setCursorColumn 30
   putStrLn  $ third r 
   setSGR [Reset]
   showResults rs

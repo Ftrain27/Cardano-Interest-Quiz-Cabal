@@ -34,6 +34,7 @@ wait x
 
 runIt :: StateT Tracker IO ()
 runIt = do
+  io $ putStrLn ""
   runQuiz allQuestions
   io $ putStrLn ""
   io endScreen
@@ -53,6 +54,5 @@ runQuiz (q:qs) = do
   ans <- io (quietly getChar)
   io $ putStrLn ""
   ansCheck ans q
-  io $ putStrLn ("You chose " ++ [ans])
   io $ putStrLn ""
   runQuiz qs
