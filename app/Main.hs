@@ -6,6 +6,7 @@ import Control.Concurrent
 import System.IO
 import System.Console.ANSI
 import System.Exit (exitSuccess)
+
 import Construct
 import Vars
 import Results
@@ -36,17 +37,31 @@ runIt :: StateT Tracker IO ()
 runIt = do
   io $ putStrLn ""
   runQuiz allQuestions
+  io $ putStrLn ""
+  io endScreen
+  -- want this to blink until thread delay ,then clear the line , then show results
+  io $ threadDelay (10 ^ 6)
+  io clearLine
+  io $ putStrLn ""
   tracker <- get
-  io $ runResults tracker
+  io $ sortResults (mkResults tracker projRec)
+  io $ putStrLn ""
+  io (putStrLn "Thank you for your time")
 
 runQuiz :: (MonadIO m, MonadState Tracker m) => Quiz -> m ()
 runQuiz []     = return ()
 runQuiz (q:qs) = do 
-  io $ showQuestion q
+  nextQuestion
+  showQuestion q
   ans <- io (quietly getChar)
   io $ putStrLn ""
   ansCheck ans q
   io $ putStrLn ""
+
+  --testing qNum
+  tracker <- get
+  io $ putStrLn (show tracker)
+
   runQuiz qs
 
 runResults :: Tracker -> IO ()

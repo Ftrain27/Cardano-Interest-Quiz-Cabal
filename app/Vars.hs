@@ -39,16 +39,16 @@ data Tracker = Tracker
     , qNum       :: Score
     } deriving (Show, Eq)
 
-q1  = (Nft, "1. Have you heard of NFTs?", ["a. I know about it, but it doesn't interest me","b. What is that?","c. I think I have before", "d. I love Nfts!"])
-q2  = (Nft, "2. Do you have any NFTs?", ["a. No", "b. Yes, I love collecting them to show off", "c. Yes, I love collecting them for their utility", "d. Yes, I love flipping them"])
-q3  = (Defi, "3. Have you heard of DeFi?", ["a. I know about it, but it doesn't interest me","b. What is that?","c. I think I have before", "d. I love Defi!"])
-q4  = (Defi, "4. Have you used any DeFi protocols?", ["a. No", "b. Yes, I love doing price arbitrage!", "c. Yes, I love yield farming!", "d. Yes, I love exploring novel defi protocol features!"])
-q5  = (Gaming, "5. Have you heard of Play to Earn `P2E`?", ["a. I know about it, but it doesn't interest me","b. What is that?","c. I think I have before", "d. I love P2E!"])
-q6  = (Gaming, "6. Have you played any P2E games?", ["a. No", "b. I'm more of an investor than a player", "c. I want to, but I'm waiting for the games to actually be fun", "d. Of course, Axie Infinity is my life!"])
-q7  = (Identity, "7. Have you heard of blockchain identity solutions before?", ["a. I know about it, but it doesn't interest me","b. What is that?","c. I think I have before", "d. I love Identity solutions!"])
-q8  = (Identity, "8. Do you have any identification issues?", ["a. No", "b. Yes, I have a million online accounts", "c. Yes, I travel a lot and documentation is difficult to deal with", "d. Yes, I have other issues with identification"])
-q9  = (Metaverse, "9. Have you heard of the Metaverse?", ["a. I know about it, but it doesn't interest me","b. What is that?","c. I think I have before", "d. I love the Metaverse!"])
-q10 = (Metaverse, "10. Have you participated in any Metaverse worlds?", ["a. No", "b. I'm more of an investor than a participant", "c. I want to, but I'm waiting for the worlds to actually be interesting", "d. Of course, Virtua is my life!"])
+q1  = (Nft, "Have you heard of NFTs?", ["a. I know about it, but it doesn't interest me","b. What is that?","c. I think I have before", "d. I love Nfts!"])
+q2  = (Nft, "Do you have any NFTs?", ["a. No", "b. Yes, I love collecting them to show off", "c. Yes, I love collecting them for their utility", "d. Yes, I love flipping them"])
+q3  = (Defi, "Have you heard of DeFi?", ["a. I know about it, but it doesn't interest me","b. What is that?","c. I think I have before", "d. I love Defi!"])
+q4  = (Defi, "Have you used any DeFi protocols?", ["a. No", "b. Yes, I love doing price arbitrage!", "c. Yes, I love yield farming!", "d. Yes, I love exploring novel defi protocol features!"])
+q5  = (Gaming, "Have you heard of Play to Earn `P2E`?", ["a. I know about it, but it doesn't interest me","b. What is that?","c. I think I have before", "d. I love P2E!"])
+q6  = (Gaming, "Have you played any P2E games?", ["a. No", "b. I'm more of an investor than a player", "c. I want to, but I'm waiting for the games to actually be fun", "d. Of course, Axie Infinity is my life!"])
+q7  = (Identity, "Have you heard of blockchain identity solutions before?", ["a. I know about it, but it doesn't interest me","b. What is that?","c. I think I have before", "d. I love Identity solutions!"])
+q8  = (Identity, "Do you have any identification issues?", ["a. No", "b. Yes, I have a million online accounts", "c. Yes, I travel a lot and documentation is difficult to deal with", "d. Yes, I have other issues with identification"])
+q9  = (Metaverse, "Have you heard of the Metaverse?", ["a. I know about it, but it doesn't interest me","b. What is that?","c. I think I have before", "d. I love the Metaverse!"])
+q10 = (Metaverse, "Have you participated in any Metaverse worlds?", ["a. No", "b. I'm more of an investor than a participant", "c. I want to, but I'm waiting for the worlds to actually be interesting", "d. Of course, Virtua is my life!"])
 
 allQuestions :: Quiz 
 allQuestions =  [q1, q2, q3, q4, q5, q6, q7, q8, q9, q10]

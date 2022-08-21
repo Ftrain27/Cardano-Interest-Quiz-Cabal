@@ -53,6 +53,9 @@ modifyMetaverse f t = t { _Metaverse = f (_Metaverse t) }
 incQNum :: Tracker -> Tracker
 incQNum t = t { qNum = (+1) (qNum t)}
 
+nextQuestion :: (MonadIO m, MonadState Tracker m) => m ()
+nextQuestion = modify $ incQNum
+
 --Impure Code
 
 io :: MonadIO m => IO a -> m a  
@@ -65,10 +68,18 @@ quietly ioa = do
   hSetEcho stdin True
   return a
 
-showQuestion :: Question -> IO ()
+-- showQuestion :: Question -> IO ()
+-- showQuestion (_ , q , os) = do
+--   bold $ putStrLn q
+--   helper os where
+--     helper []      = return ()
+--     helper (x:xs)  = putStrLn ("    " ++  x) >> helper xs
+
+showQuestion :: (MonadIO m, MonadState Tracker m) => Question -> m()
 showQuestion (_ , q , os) = do
-  bold $ putStrLn q
-  helper os where
+  tracker <- get
+  io $ bold $ putStrLn (concat [show (qNum tracker), ". ", q])
+  io (helper os) where
     helper []      = return ()
     helper (x:xs)  = putStrLn ("    " ++  x) >> helper xs
   
