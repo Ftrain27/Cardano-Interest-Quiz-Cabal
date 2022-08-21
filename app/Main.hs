@@ -38,15 +38,8 @@ runIt = do
   io $ putStrLn ""
   runQuiz allQuestions
   io $ putStrLn ""
-  io endScreen
-  -- want this to blink until thread delay ,then clear the line , then show results
-  io $ threadDelay (10 ^ 6)
-  io clearLine
-  io $ putStrLn ""
   tracker <- get
-  io $ sortResults (mkResults tracker projRec)
-  io $ putStrLn ""
-  io (putStrLn "Thank you for your time")
+  io $ runResults tracker
 
 runQuiz :: (MonadIO m, MonadState Tracker m) => Quiz -> m ()
 runQuiz []     = return ()
@@ -57,11 +50,6 @@ runQuiz (q:qs) = do
   io $ putStrLn ""
   ansCheck ans q
   io $ putStrLn ""
-
-  --testing qNum
-  tracker <- get
-  io $ putStrLn (show tracker)
-
   runQuiz qs
 
 runResults :: Tracker -> IO ()
@@ -70,6 +58,7 @@ runResults t = do
   io $ reset
   io $ threadDelay (2 * (10 ^ 6))
   -- io clearLine -- do we really want this text to go away? it looks nice imo to keep it here 
+  -- initially wanted it to flash then turn to green "All done" message
   io $ putStrLn "Here are the projects that would most interest you:"
   io $ putStrLn ""
   io $ sortResults (mkResults t projRec)

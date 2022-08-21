@@ -16,6 +16,7 @@ startUp = do
     putStrLn "Please press a, b, c or d to answer each question"
     putStrLn "You can also press q to quit at any time"
     putStrLn "Press any key to continue..."
+    reset
 
 italics :: IO a -> IO a
 italics ioa = do
