@@ -49,7 +49,7 @@ sortResults recs =
 
 showResults :: Recommendations -> IO ()
 showResults [] = return ()
-showResults (r : rs) = do -- putStrLn (second r ++ "    " ++ third r) >> showResults rs
+showResults (r : rs) = do
   setSGR [SetColor Foreground Dull Blue,SetConsoleIntensity BoldIntensity]
   putStr $ second r 
   setSGR [SetColor Foreground Dull Red,SetConsoleIntensity NormalIntensity]
@@ -57,60 +57,3 @@ showResults (r : rs) = do -- putStrLn (second r ++ "    " ++ third r) >> showRes
   putStrLn $ third r 
   reset
   showResults rs
-
--- mkResults :: (MonadIO m, MonadState Tracker m) => Recommendations -> m (Recommendations)
-
---  2. Assign a number to each data type, then use a random generator to select a data type and remove all of its associated results
-
--- eventually implement a web scraper and interpreter to suggest up-to-date projects
-
--- **RECOMMENDATIONS**
--- **NFT**
--- Yummi Universe
--- https://yummiuniverse.com/
-
--- Ada Handle
--- https://adahandle.com/
-
--- unsigned_algorithms
--- https://www.unsigs.com/
-
--- **DEFI**
--- SundaeSwap
--- https://www.sundaeswap.finance/
-
--- Liqwid
--- https://www.liqwid.finance/
-
--- Aada
--- https://aada.finance/
-
--- **GAMING**
--- HashGuardians
--- https://www.hashguardians.io/
-
--- Bears Club
--- https://bearsclub.io/
-
--- DEADPXLZ
--- https://pxlz.org/
-
--- **IDENTITY**
--- Blockademia
--- https://blockademia.com/en/
-
--- dHealth
--- https://www.dhealth.com/
-
--- Atala PRISM
--- https://atalaprism.io/
-
--- **METAVERSE**
--- Cardano Island (Virtua)
--- https://cardano.virtua.com/
-
--- Cornucopias
--- https://www.cornucopias.io/
-
--- Space Tokens
--- https://www.spacetokens.io/

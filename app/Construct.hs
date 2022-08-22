@@ -68,13 +68,6 @@ quietly ioa = do
   hSetEcho stdin True
   return a
 
--- showQuestion :: Question -> IO ()
--- showQuestion (_ , q , os) = do
---   bold $ putStrLn q
---   helper os where
---     helper []      = return ()
---     helper (x:xs)  = putStrLn ("    " ++  x) >> helper xs
-
 showQuestion :: (MonadIO m, MonadState Tracker m) => Question -> m()
 showQuestion (_ , q , os) = do
   tracker <- get

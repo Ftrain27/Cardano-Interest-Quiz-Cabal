@@ -14,6 +14,7 @@ import ANSI
 
 -- suggested additions:
 -- add ability to go back and change answers
+-- eventually implement a web scraper and interpreter to suggest up-to-date projects
 
 main :: IO ()
 main =  do 
