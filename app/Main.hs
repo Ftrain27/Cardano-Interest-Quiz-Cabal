@@ -54,11 +54,15 @@ runQuiz (q:qs) = do
 
 runResults :: Tracker -> IO ()
 runResults t = do
-  io $ bold $ putStrLn "Calculating results..."
-  io $ reset
+  io $ setSGR [SetColor Foreground Vivid Yellow]
+  io $ bold $ putStr "Calculating results..."
+  hFlush stdout
   io $ threadDelay (2 * (10 ^ 6))
-  -- io clearLine -- do we really want this text to go away? it looks nice imo to keep it here 
-  -- initially wanted it to flash then turn to green "All done" message
+  io clearLine
+  io $ setSGR [SetColor Foreground Vivid Green]
+  io $ setCursorColumn 0
+  io $ bold $ putStrLn "Done"
+  io $ reset
   io $ putStrLn "Here are the projects that would most interest you:"
   io $ putStrLn ""
   io $ sortResults (mkResults t projRec)
