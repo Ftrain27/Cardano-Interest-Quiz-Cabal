@@ -4,46 +4,71 @@ module Main where
 import Control.Monad.State
 import Control.Concurrent
 import System.IO
+import System.Console.ANSI
+import System.Exit (exitSuccess)
+
 import Construct
 import Vars
 import Results
+import ANSI
+import Test
 
 -- suggested additions:
 -- add ability to go back and change answers
+-- eventually implement a web scraper and interpreter to suggest up-to-date projects
 
 main :: IO ()
 main =  do 
-  putStrLn "Welcome to the Cardano Interest Quiz!"
-  putStrLn "This is a simple, 10 question quiz used to match your interests to relevant crypto projects in the Cardano Ecosystem"
-  putStrLn "Please press a, b, c or d to answer each question"
-  putStrLn "You can also press q to quit at any time"
+  hideCursor
+  startUp
   hSetBuffering stdin NoBuffering
+  hFlush stdout
+  x <- quietly getChar
+  wait x
+  showCursor
   tracker <- mkTracker
   evalStateT runIt tracker
   return ()
 
+wait :: Char -> IO ()
+wait x
+  | x == 'q' = putStrLn "Thank you for your time" >> exitSuccess
+  -- | x == 't' = mainTest >> return ()
+  | otherwise = return ()
+
 runIt :: StateT Tracker IO ()
 runIt = do
-  runQuiz allQuestions
-  io (putStrLn "Calculating results...")
-  io $ threadDelay (10 ^ 6)
+  io $ putStrLn ""
+  allRandomQuestions <- io $ randomize allQuestions
+  runQuiz allRandomQuestions
+  io $ putStrLn ""
   tracker <- get
-  io $ sortResults (mkResults tracker projRec)
-  io (putStrLn "Thank you for your time")
-
+  io $ runResults tracker
 
 runQuiz :: (MonadIO m, MonadState Tracker m) => Quiz -> m ()
 runQuiz []     = return ()
 runQuiz (q:qs) = do 
--- we need to implement incQNum here like how we did mkResults in line 31, then we can remove hard-coded question numbers from vars
-  io $ showQuestion q
+  nextQuestion
+  showQuestion q
   ans <- io (quietly getChar)
+  io $ putStrLn ""
   ansCheck ans q
+  io $ putStrLn ""
   runQuiz qs
 
---runResults :: (MonadIO m, MonadState Tracker m) => m ()
---runResults = do
-  --tracker <- get
-  --io $ print $ show (mkResults tracker projRec) 
-
--- runStateT :: s -> m (a, s)
+runResults :: Tracker -> IO ()
+runResults t = do
+  setSGR [SetColor Foreground Vivid Yellow]
+  bold $ putStr "Calculating results..."
+  hFlush stdout
+  threadDelay (2 * (10 ^ 6))
+  clearLine
+  setSGR [SetColor Foreground Vivid Green]
+  setCursorColumn 0
+  bold $ putStrLn "Done"
+  reset
+  putStrLn "Here are the projects that would most interest you:"
+  putStrLn ""
+  sortResults (mkResults t projRec)
+  putStrLn ""
+  putStrLn "Thank you for your time"

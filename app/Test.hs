@@ -1,33 +1,52 @@
 module Test where
+
 import Test.QuickCheck
 import Test.HUnit
+-- import Clash.Netlist.Types (NumLit)
+
 import Construct
 import Vars
+import Results
 
- --prop_reverseReverse :: [Int] -> Bool
--- prop_reverseReverse xs = reverse (reverse xs) == xs
+{-fxns to test:
+wait (if given 'q', does it quit? if given 't', does it test? if given any other key, does it continue?)
+showQuestion (if given an empty list, does it do nothing? if given a Question, does it print the qNum and the formatted question?)
+showAns (if given nothing, does it print "you chose "? if given a char, does it print "you chose 'x' "?)
+first, second, third, fourth (do each of these functions return the correct tuple value?)
+mkResults (if given an empty list, does it return an empty list? )
+showResults (if given an empty list, does it do nothing? if given Recommendations, does it print the 2nd and 3rd tuple values for each rec?)
+runQuiz (if given empty list, does it do nothing? if given a Question, does it increment the q number and getChar?)
+-}
 
---pushTest :: Assertion
---pushTest = [NumLit 1] ^? push (NumLit 1)
+-- testShowResultsEmptyList :: Test
+-- testShowResultsEmptyList =
+--     TestCase $ assertEqual "Should return Nothing for empty list" Nothing
+--                         (showResults ([] :: Recommendations))
 
---pushPopTest :: Assertion
---pushPopTest = [] ^? (push (NumLit 0) >> void pop)
+-- testShowResultsNonEmptyList :: Test
+-- testShowResultsNonEmptyList =
+--     TestCase $ assertEqual "Should return a result for non empty list" (("Yummi Universe","https://yummiuniverse.com/"))
+--                (showResults (Nft, "Yummi Universe","https://yummiuniverse.com/", 1))
 
---main :: IO ()
---main = defaultMainWithOpts
---       [testCase "push" pushTest
-  --     ,testCase "push-pop" pushPopTest]
-   --    mempty
 
--- testShowQuestionEmptyList :: Test
--- testShowQuestionEmptyList =
---     TestCase $ assertEqual "Should return Nothing for empty list"
---                            Nothing (showQuestion ([]::[String]))
+-- mainTest :: IO Counts
+-- mainTest = runTestTT $ TestList [testShowResultsEmptyList, testShowResultsNonEmptyList]
 
--- testShowQuestionNonEmptyList :: Test
--- testShowQuestionNonEmptyList =
---     TestCase $ assertEqual "Should return a question for non empty list" (Just 1)
---                (showQuestion ([1]::[String]))
+
+-- module EvenOrOddSpec where
+-- import EvenOrOdd
+-- import Test.QuickCheck
+-- import Test.Hspec
+
+-- spec :: Spec
+-- spec = do
+--   describe "Examples" $ do
+--     it "Evens:" $ do
+--       evenOrOdd 2 `shouldBe` "Even"
+--       evenOrOdd 0 `shouldBe` "Even"
+--     it "Odds" $ do
+--       evenOrOdd 7 `shouldBe` "Odd"
+--       evenOrOdd 1 `shouldBe` "Odd"
 
 -- testInvalidAns :: Test
 -- testInvalidAns =
@@ -46,5 +65,17 @@ import Vars
 
 -- not sure if this case value is working properly as intended 
 
--- main :: IO Counts
--- main = runTestTT $ TestList [testShowQuestionEmptyList, testShowQuestionNonEmptyList, testInvalidAns]
+-- prop_reverseReverse :: [Int] -> Bool
+-- prop_reverseReverse xs = reverse (reverse xs) == xs
+
+-- pushTest :: Assertion
+-- pushTest = [NumLit 1] ^? push (NumLit 1)
+
+-- pushPopTest :: Assertion
+-- pushPopTest = [] ^? (push (NumLit 0) >> void pop)
+
+-- main :: IO ()
+-- main = defaultMainWithOpts
+--       [testCase "push" pushTest
+--       ,testCase "push-pop" pushPopTest]
+--       mempty

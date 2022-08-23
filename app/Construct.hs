@@ -6,7 +6,13 @@ module Construct where
 import Control.Monad.State
 import System.IO
 import System.Exit (exitSuccess)
+import System.Console.ANSI
+import System.Random
+import Data.List (sortBy)
+import Data.Function (on)
+
 import Vars
+import ANSI
 
 --Pure Code
 
@@ -20,10 +26,6 @@ mkTracker = return $ Tracker
     , _Metaverse = 0
     , qNum       = 0
   }
---add in initialization for random generator here also
---Generator might look somthing like this: 
---import System.Random
---main = replicateM (randomTracker :: Tracker Score) >>= print
 
 modifyTracker :: (MonadIO m, MonadState Tracker m) => Category -> (Score -> Score) -> m ()
 modifyTracker c f 
@@ -51,6 +53,9 @@ modifyMetaverse f t = t { _Metaverse = f (_Metaverse t) }
 incQNum :: Tracker -> Tracker
 incQNum t = t { qNum = (+1) (qNum t)}
 
+nextQuestion :: (MonadIO m, MonadState Tracker m) => m ()
+nextQuestion = modify $ incQNum
+
 --Impure Code
 
 io :: MonadIO m => IO a -> m a  
@@ -63,16 +68,23 @@ quietly ioa = do
   hSetEcho stdin True
   return a
 
-showQuestion :: Question -> IO ()
-showQuestion (_ , q , os) = do
-  putStrLn q
-  helper os where
-    helper []     = return ()
-    helper (x:xs) = putStrLn ("    " ++  x) >> helper xs
+randomize :: [a] -> IO [a]                                                                                                                                             
+randomize xs = do                                                                                                                                                      
+  ys <- replicateM (length xs) $ randomRIO (1 :: Int, 100000)                                                                                                          
+  pure $ map fst $ sortBy (compare `on` snd) (zip xs ys)
 
+showQuestion :: (MonadIO m, MonadState Tracker m) => Question -> m()
+showQuestion (_ , q , os) = do
+  tracker <- get
+  io $ bold $ putStrLn (concat [show (qNum tracker), ". ", q])
+  io (helper os) where
+    helper []      = return ()
+    helper (x:xs)  = putStrLn ("    " ++  x) >> helper xs
+  
 invalidAns :: IO Char
 invalidAns = do 
-  putStrLn "You entered an invalid answer. Please try again"
+  italics $ putStrLn "You entered an invalid answer. Please try again!"
+  putStrLn ""
   quietly getChar
 
 ansCheck :: (MonadIO m, MonadState Tracker m) => Answer -> Question -> m ()

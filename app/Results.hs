@@ -5,21 +5,24 @@ module Results where
 import Control.Monad.State
 import Data.List (sortBy)
 import Data.Function (on)
+import System.Console.ANSI
+
 import Vars
+import ANSI
 
 --Pure Code
 
-fourth :: (a,b,c,d) -> d
-fourth (a,b,c,d) = d
-
-third :: (a,b,c,d) -> c
-third (a,b,c,d) = c
+first :: (a,b,c,d) -> a
+first (a,b,c,d) = a
 
 second :: (a,b,c,d) -> b
 second (a,b,c,d) = b
 
-first :: (a,b,c,d) -> a
-first (a,b,c,d) = a
+third :: (a,b,c,d) -> c
+third (a,b,c,d) = c
+
+fourth :: (a,b,c,d) -> d
+fourth (a,b,c,d) = d
 
 mkResults :: Tracker -> Recommendations -> Recommendations
 mkResults t [] = []
@@ -46,63 +49,11 @@ sortResults recs =
 
 showResults :: Recommendations -> IO ()
 showResults [] = return ()
-showResults (r : rs) = putStrLn (second r ++ "    " ++ third r) >> showResults rs
-
--- https://hackage.haskell.org/package/tuple-0.3.0.2/docs/Data-Tuple-Select.html has a solution, but replit can't import the package
-
--- mkResults :: (MonadIO m, MonadState Tracker m) => Recommendations -> m (Recommendations)
-
---  2. Assign a number to each data type, then use a random generator to select a data type and remove all of its associated results
-
--- eventually implement a web scraper and interpreter to suggest up-to-date projects
-
--- **RECOMMENDATIONS**
--- **NFT**
--- Yummi Universe
--- https://yummiuniverse.com/
-
--- Ada Handle
--- https://adahandle.com/
-
--- unsigned_algorithms
--- https://www.unsigs.com/
-
--- **DEFI**
--- SundaeSwap
--- https://www.sundaeswap.finance/
-
--- Liqwid
--- https://www.liqwid.finance/
-
--- Aada
--- https://aada.finance/
-
--- **GAMING**
--- HashGuardians
--- https://www.hashguardians.io/
-
--- Bears Club
--- https://bearsclub.io/
-
--- DEADPXLZ
--- https://pxlz.org/
-
--- **IDENTITY**
--- Blockademia
--- https://blockademia.com/en/
-
--- dHealth
--- https://www.dhealth.com/
-
--- Atala PRISM
--- https://atalaprism.io/
-
--- **METAVERSE**
--- Cardano Island (Virtua)
--- https://cardano.virtua.com/
-
--- Cornucopias
--- https://www.cornucopias.io/
-
--- Space Tokens
--- https://www.spacetokens.io/
+showResults (r : rs) = do
+  setSGR [SetColor Foreground Dull Blue,SetConsoleIntensity BoldIntensity]
+  putStr $ second r 
+  setSGR [SetColor Foreground Dull Red,SetConsoleIntensity NormalIntensity]
+  setCursorColumn 25
+  putStrLn $ third r 
+  reset
+  showResults rs

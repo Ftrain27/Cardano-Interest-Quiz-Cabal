@@ -25,10 +25,10 @@ executable EfrainMassanka-Garcia
     main-is:          Main.hs
 
     -- Modules included in this executable, other than Main.
-    other-modules: Results, Test, Vars, Construct
+    other-modules: Results, Test, Vars, Construct, ANSI
 
     -- LANGUAGE extensions used by modules in this package.
     -- other-extensions:
-    build-depends:    base ^>=4.14.3.0, mtl, QuickCheck, HUnit
+    build-depends:    base ^>=4.14.3.0, mtl, QuickCheck, HUnit, ansi-terminal, random
     hs-source-dirs:   app
     default-language: Haskell2010

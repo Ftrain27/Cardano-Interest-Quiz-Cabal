@@ -30,6 +30,16 @@
   (major1) == 2 && (major2) <  14 || \
   (major1) == 2 && (major2) == 14 && (minor) <= 2)
 #endif /* MIN_VERSION_QuickCheck */
+/* package ansi-terminal-0.11.3 */
+#ifndef VERSION_ansi_terminal
+#define VERSION_ansi_terminal "0.11.3"
+#endif /* VERSION_ansi_terminal */
+#ifndef MIN_VERSION_ansi_terminal
+#define MIN_VERSION_ansi_terminal(major1,major2,minor) (\
+  (major1) <  0 || \
+  (major1) == 0 && (major2) <  11 || \
+  (major1) == 0 && (major2) == 11 && (minor) <= 3)
+#endif /* MIN_VERSION_ansi_terminal */
 /* package base-4.14.3.0 */
 #ifndef VERSION_base
 #define VERSION_base "4.14.3.0"
@@ -50,6 +60,16 @@
   (major1) == 2 && (major2) <  2 || \
   (major1) == 2 && (major2) == 2 && (minor) <= 2)
 #endif /* MIN_VERSION_mtl */
+/* package random-1.2.1.1 */
+#ifndef VERSION_random
+#define VERSION_random "1.2.1.1"
+#endif /* VERSION_random */
+#ifndef MIN_VERSION_random
+#define MIN_VERSION_random(major1,major2,minor) (\
+  (major1) <  1 || \
+  (major1) == 1 && (major2) <  2 || \
+  (major1) == 1 && (major2) == 2 && (minor) <= 1)
+#endif /* MIN_VERSION_random */
 
 /* tool gcc-12.0.0 */
 #ifndef TOOL_VERSION_gcc
