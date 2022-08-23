@@ -7,6 +7,9 @@ import Control.Monad.State
 import System.IO
 import System.Exit (exitSuccess)
 import System.Console.ANSI
+import System.Random
+import Data.List (sortBy)
+import Data.Function (on)
 import Vars
 import ANSI
 
@@ -22,9 +25,8 @@ mkTracker = return $ Tracker
     , _Metaverse = 0
     , qNum       = 0
   }
---add in initialization for random generator here also
---Generator might look somthing like this: 
---import System.Random
+
+
 --main = replicateM (randomTracker :: Tracker Score) >>= print
 
 modifyTracker :: (MonadIO m, MonadState Tracker m) => Category -> (Score -> Score) -> m ()
@@ -67,6 +69,11 @@ quietly ioa = do
   a <- ioa
   hSetEcho stdin True
   return a
+
+randomize :: [a] -> IO [a]                                                                                                                                             
+randomize xs = do                                                                                                                                                      
+  ys <- replicateM (length xs) $ randomRIO (1 :: Int, 100000)                                                                                                          
+  pure $ map fst $ sortBy (compare `on` snd) (zip xs ys)
 
 showQuestion :: (MonadIO m, MonadState Tracker m) => Question -> m()
 showQuestion (_ , q , os) = do

@@ -8,10 +8,9 @@ startUp = do
     setCursorPosition 5 0
     setSGR [  SetColor Foreground Vivid Red
             , SetColor Background Vivid Blue
-            , SetBlinkSpeed RapidBlink
             ]
     bold $ putStrLn "Welcome to the Cardano Interest Quiz!"
-    setSGR [ SetColor Foreground Dull Red, SetBlinkSpeed NoBlink ]
+    setSGR [ SetColor Foreground Dull Red ]
     putStrLn "This is a simple, 10 question quiz used to match your interests to relevant crypto projects in the Cardano Ecosystem"
     putStrLn "Please press a, b, c or d to answer each question"
     putStrLn "You can also press q to quit at any time"

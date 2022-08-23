@@ -37,7 +37,8 @@ wait x
 runIt :: StateT Tracker IO ()
 runIt = do
   io $ putStrLn ""
-  runQuiz allQuestions
+  allRandomQuestions <- io $ randomize allQuestions
+  runQuiz allRandomQuestions
   io $ putStrLn ""
   tracker <- get
   io $ runResults tracker
@@ -55,17 +56,17 @@ runQuiz (q:qs) = do
 
 runResults :: Tracker -> IO ()
 runResults t = do
-  io $ setSGR [SetColor Foreground Vivid Yellow]
-  io $ bold $ putStr "Calculating results..."
+  setSGR [SetColor Foreground Vivid Yellow]
+  bold $ putStr "Calculating results..."
   hFlush stdout
-  io $ threadDelay (2 * (10 ^ 6))
-  io clearLine
-  io $ setSGR [SetColor Foreground Vivid Green]
-  io $ setCursorColumn 0
-  io $ bold $ putStrLn "Done"
-  io $ reset
-  io $ putStrLn "Here are the projects that would most interest you:"
-  io $ putStrLn ""
-  io $ sortResults (mkResults t projRec)
-  io $ putStrLn ""
-  io (putStrLn "Thank you for your time")
+  threadDelay (2 * (10 ^ 6))
+  clearLine
+  setSGR [SetColor Foreground Vivid Green]
+  setCursorColumn 0
+  bold $ putStrLn "Done"
+  reset
+  putStrLn "Here are the projects that would most interest you:"
+  putStrLn ""
+  sortResults (mkResults t projRec)
+  putStrLn ""
+  putStrLn "Thank you for your time"
