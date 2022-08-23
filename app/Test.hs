@@ -6,6 +6,7 @@ import Test.HUnit
 
 import Construct
 import Vars
+import Results
 
 {-fxns to test:
 wait (if given 'q', does it quit? if given 't', does it test? if given any other key, does it continue?)
@@ -16,15 +17,36 @@ mkResults (if given an empty list, does it return an empty list? )
 showResults (if given an empty list, does it do nothing? if given Recommendations, does it print the 2nd and 3rd tuple values for each rec?)
 runQuiz (if given empty list, does it do nothing? if given a Question, does it increment the q number and getChar?)
 -}
-testShowQuestionEmptyList :: Test
-testShowQuestionEmptyList =
-    TestCase $ assertEqual "Should return Nothing for empty list"
-                           Nothing (showQuestion [])
 
-testShowQuestionNonEmptyList :: Test
-testShowQuestionNonEmptyList =
-    TestCase $ assertEqual "Should return a question for non empty list" (Just 1)
-               (showQuestion (allQuestions!!0 :: Question))
+-- testShowResultsEmptyList :: Test
+-- testShowResultsEmptyList =
+--     TestCase $ assertEqual "Should return Nothing for empty list" Nothing
+--                         (showResults ([] :: Recommendations))
+
+-- testShowResultsNonEmptyList :: Test
+-- testShowResultsNonEmptyList =
+--     TestCase $ assertEqual "Should return a result for non empty list" (("Yummi Universe","https://yummiuniverse.com/"))
+--                (showResults (Nft, "Yummi Universe","https://yummiuniverse.com/", 1))
+
+
+-- mainTest :: IO Counts
+-- mainTest = runTestTT $ TestList [testShowResultsEmptyList, testShowResultsNonEmptyList]
+
+
+-- module EvenOrOddSpec where
+-- import EvenOrOdd
+-- import Test.QuickCheck
+-- import Test.Hspec
+
+-- spec :: Spec
+-- spec = do
+--   describe "Examples" $ do
+--     it "Evens:" $ do
+--       evenOrOdd 2 `shouldBe` "Even"
+--       evenOrOdd 0 `shouldBe` "Even"
+--     it "Odds" $ do
+--       evenOrOdd 7 `shouldBe` "Odd"
+--       evenOrOdd 1 `shouldBe` "Odd"
 
 -- testInvalidAns :: Test
 -- testInvalidAns =
@@ -42,9 +64,6 @@ testShowQuestionNonEmptyList =
 --                            Nothing (catGet ([]::[Int]))
 
 -- not sure if this case value is working properly as intended 
-
-mainTest :: IO Counts
-mainTest = runTestTT $ TestList [testShowQuestionEmptyList, testShowQuestionNonEmptyList]
 
 -- prop_reverseReverse :: [Int] -> Bool
 -- prop_reverseReverse xs = reverse (reverse xs) == xs

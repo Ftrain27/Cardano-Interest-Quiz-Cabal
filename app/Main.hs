@@ -33,7 +33,7 @@ main =  do
 wait :: Char -> IO ()
 wait x
   | x == 'q' = putStrLn "Thank you for your time" >> exitSuccess
-  | x == 't' = mainTest >> return ()
+  -- | x == 't' = mainTest >> return ()
   | otherwise = return ()
 
 runIt :: StateT Tracker IO ()
