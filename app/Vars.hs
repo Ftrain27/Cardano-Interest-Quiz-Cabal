@@ -9,7 +9,6 @@ module Vars (
     ,Quiz
     ,Project
     ,Recommendations
-    ,Result
     ,Category (..)
     ,Tracker (..)
     ,allQuestions
@@ -27,7 +26,6 @@ type Question        = (Category, Prompt, [Option])
 type Quiz            = [Question]
 type Project         = (Category, Name, Link, Score) 
 type Recommendations = [Project]
-type Result          = (Name, Link)
 
 data Category = Nft | Defi | Gaming | Identity | Metaverse deriving (Show, Eq, Ord)
 data Tracker = Tracker 

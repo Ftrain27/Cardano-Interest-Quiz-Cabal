@@ -81,12 +81,6 @@ showQuestion (_ , q , os) = do
     helper []      = return ()
     helper (x:xs)  = putStrLn ("    " ++  x) >> helper xs
   
-invalidAns :: IO Char
-invalidAns = do 
-  italics $ putStrLn "You entered an invalid answer. Please try again!"
-  putStrLn ""
-  quietly getChar
-
 ansCheck :: (MonadIO m, MonadState Tracker m) => Answer -> Question -> m ()
 ansCheck x ques@(c, _, _) =
  case x of 
@@ -98,6 +92,13 @@ ansCheck x ques@(c, _, _) =
     _   -> do 
       ans <- io invalidAns
       ansCheck ans ques
+      
+invalidAns :: IO Char
+invalidAns = do 
+  italics $ putStrLn "You entered an invalid answer. Please try again!"
+  putStrLn ""
+  quietly getChar
+
 
 showAns :: (MonadIO m, MonadState Tracker m) => Char -> m ()
 showAns x = io $ putStrLn ("You chose " ++ [x])
