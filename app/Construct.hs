@@ -10,6 +10,7 @@ import System.Console.ANSI
 import System.Random
 import Data.List (sortBy)
 import Data.Function (on)
+
 import Vars
 import ANSI
 
@@ -25,9 +26,6 @@ mkTracker = return $ Tracker
     , _Metaverse = 0
     , qNum       = 0
   }
-
-
---main = replicateM (randomTracker :: Tracker Score) >>= print
 
 modifyTracker :: (MonadIO m, MonadState Tracker m) => Category -> (Score -> Score) -> m ()
 modifyTracker c f 

@@ -6,6 +6,7 @@ import Control.Monad.State
 import Data.List (sortBy)
 import Data.Function (on)
 import System.Console.ANSI
+
 import Vars
 import ANSI
 
@@ -22,7 +23,6 @@ third (a,b,c,d) = c
 
 fourth :: (a,b,c,d) -> d
 fourth (a,b,c,d) = d
-
 
 mkResults :: Tracker -> Recommendations -> Recommendations
 mkResults t [] = []
