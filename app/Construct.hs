@@ -100,4 +100,4 @@ ansCheck x ques@(c, _, _) =
       ansCheck ans ques
 
 showAns :: (MonadIO m, MonadState Tracker m) => Char -> m ()
-showAns x = io $ putStrLn ("You chose " ++ [x]) 
+showAns x = io $ putStrLn ("You chose " ++ [x])
