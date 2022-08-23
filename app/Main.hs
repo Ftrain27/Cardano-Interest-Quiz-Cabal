@@ -11,7 +11,6 @@ import Construct
 import Vars
 import Results
 import ANSI
-import Test
 
 -- suggested additions:
 -- add ability to go back and change answers
@@ -33,7 +32,6 @@ main =  do
 wait :: Char -> IO ()
 wait x
   | x == 'q' = putStrLn "Thank you for your time" >> exitSuccess
-  -- | x == 't' = mainTest >> return ()
   | otherwise = return ()
 
 runIt :: StateT Tracker IO ()
