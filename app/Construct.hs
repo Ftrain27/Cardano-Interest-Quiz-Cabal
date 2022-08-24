@@ -99,6 +99,5 @@ invalidAns = do
   putStrLn ""
   quietly getChar
 
-
 showAns :: (MonadIO m, MonadState Tracker m) => Char -> m ()
 showAns x = io $ putStrLn ("You chose " ++ [x])
